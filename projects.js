@@ -1,4 +1,3 @@
-// Public descriptions only for confidential projects; no internal media attached.
 const categories = [
   {
     "id": "app",
@@ -362,7 +361,9 @@ const projects = [
       ]
     ],
     "tone": "yellow",
-    "graphic": "我们如此\n痛爱着\n新闻。"
+    "graphic": "我们如此\n痛爱着\n新闻。",
+    "cover": "assets/magazine-source.jpg",
+    "coverStyle": "editorial-cover"
   },
   {
     "id": "video-interview",
