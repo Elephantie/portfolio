@@ -184,12 +184,12 @@ const projects = [
     "files": [
       [
         "个人公众号完整图文",
-        "公众号编辑/内容加排版/自己的公众号.jpg"
+        "公众号编辑/内容加排版/自己的公众号.png"
       ]
     ],
     "tone": "yellow",
     "group": "内容与排版",
-    "cover": "assets/preview-5.jpg"
+    "cover": "assets/personal-wechat-cover-v2.jpg"
   },
   {
     "id": "layout-0",
