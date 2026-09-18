@@ -38,8 +38,8 @@ const categories = [
     "id": "writing",
     "name": "已发布文章",
     "en": "PUBLISHED WRITING",
-    "note": "文章全文",
-    "intro": "保留文章原题与发布版本，打开 PDF 阅读全文。"
+    "note": "已发布文章 / 原文阅读",
+    "intro": "保留文章原题，前往公众号阅读完整原文。"
   },
   {
     "id": "magazine",
@@ -324,18 +324,15 @@ const projects = [
     "id": "article-canal",
     "category": "writing",
     "title": "从孤舟到安然，一条大运河，如何治愈苏轼的颠沛一生？",
-    "summary": "历史文化题材 · 已发布文章 · PDF 全文",
-    "description": "历史文化题材 · 已发布文章 · PDF 全文",
+    "summary": "历史文化题材 · 中国大运河公众号 · 原文阅读",
+    "description": "围绕苏轼的人生经历与大运河展开的已发布文章。点击“阅读原文”前往中国大运河公众号查看全文。",
     "role": "",
     "facts": [],
-    "files": [
-      [
-        "阅读完整文章",
-        "已发布文章/从孤舟到安然，一条大运河，如何治愈苏轼的颠沛一生？.pdf"
-      ]
-    ],
+    "files": [],
     "tone": "green",
-    "graphic": "从孤舟\n到安然"
+    "graphic": "从孤舟\n到安然",
+    "originalUrl": "https://mp.weixin.qq.com/s/rCRFxuOvfCzj67L1Gl_5Ug",
+    "mediaType": "article"
   },
   {
     "id": "magazine-news",
