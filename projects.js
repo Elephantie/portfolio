@@ -1,4 +1,4 @@
-// GitHub Pages public build: video files are intentionally excluded.
+// Public descriptions only for confidential projects; no internal media attached.
 const categories = [
   {
     "id": "app",
@@ -6,6 +6,13 @@ const categories = [
     "en": "APP & IP",
     "note": "项目策划 / AI 创作实践",
     "intro": "悦境母语：从产品理解、角色构思到宣传路径规划。此处仅提供文字介绍。"
+  },
+  {
+    "id": "aigc-experience",
+    "name": "AIGC 短剧实践",
+    "en": "AIGC / EXPERIENCE",
+    "note": "图像生成 / 视频生成 / 后期剪辑",
+    "intro": "从视觉资产生成到成片剪辑的实习实践，积累 AI 生图、生视频与提示词调整经验。"
   },
   {
     "id": "wechat",
@@ -85,6 +92,37 @@ const projects = [
     ],
     "files": [],
     "disclosure": "未公开项目 · 仅文字介绍"
+  },
+  {
+    "id": "aigc-drama-experience",
+    "category": "aigc-experience",
+    "title": "AI 真人短剧 · 从生成素材到成片",
+    "summary": "2026.07—2026.08 · 视觉资产生成、视频提示词调整与剪辑",
+    "role": "AI 真人短剧分镜与剪辑实习生",
+    "mediaType": "text",
+    "tone": "dark",
+    "graphic": "AIGC\n图像 · 视频",
+    "description": "在 AI 真人短剧制作实习中，参与角色、场景与道具等视觉资产生成、视频提示词修改和成片剪辑。这段实践提升了我使用 AI 生成图像与视频的能力，也让我更熟悉如何将生成素材组织为完整影像。",
+    "facts": [
+      [
+        "图像生成",
+        "使用 AI 图像模型生成角色、场景、道具等视觉资产，围绕制作需求调整提示词，为后续视频制作准备素材。"
+      ],
+      [
+        "视频生成",
+        "参与 AI 视频生成与提示词修改，将图像资产与镜头需求转化为视频素材，在反复生成、查看和调整中积累生视频经验。"
+      ],
+      [
+        "剪辑与交付",
+        "使用剪映完成成片剪辑与视觉包装，将生成素材衔接为可观看的短剧内容，贯通素材生成与后期制作。"
+      ],
+      [
+        "能力积累",
+        "从单独尝试生成图片、视频，进一步理解不同制作环节之间的配合；积累提示词表达、生成结果判断与调整、素材组织和剪辑经验。"
+      ]
+    ],
+    "files": [],
+    "disclosure": "受保密约定限制，仅介绍职责与能力积累，不展示公司画面、视频或内部资料。"
   },
   {
     "id": "wechat-recruit",
