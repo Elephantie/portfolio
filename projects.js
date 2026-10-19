@@ -11,7 +11,7 @@ const categories = [
     "name": "AIGC 短剧实践",
     "en": "AIGC / EXPERIENCE",
     "note": "图像生成 / 视频生成 / 后期剪辑",
-    "intro": "从视觉资产生成到成片剪辑的实习实践，积累 AI 生图、生视频与提示词调整经验。"
+    "intro": "从视觉资产生成到成片剪辑的实习实践。以下五支加水印成片已获授权，仅作个人作品展示。"
   },
   {
     "id": "wechat",
@@ -53,7 +53,7 @@ const categories = [
     "name": "视频作品",
     "en": "VIDEO",
     "note": "人物采访 / 剧情短片 / 生活记录",
-    "intro": "每支视频单独展示，点击即可观看。"
+    "intro": "每支视频单独展示；公开版暂提供封面与作品说明。"
   }
 ];
 const projects = [
@@ -121,7 +121,84 @@ const projects = [
       ]
     ],
     "files": [],
-    "disclosure": "受保密约定限制，仅介绍职责与能力积累，不展示公司画面、视频或内部资料。"
+    "disclosure": "以下加水印成片已获公司授权，仅作个人作品展示。",
+    "cover": "assets/aigc-blurred-watermarked.jpg",
+    "coverStyle": "blurred-cover"
+  },
+  {
+    "id": "ai-drama-01",
+    "category": "aigc-experience",
+    "title": "AI 漫剧作品 01",
+    "summary": "AI 真人短剧 · 完整成片 · 1:04",
+    "description": "实习期间参与制作的 AI 真人短剧成片。已获公司授权，展示加水印版本，仅作个人作品展示。",
+    "role": "AI 真人短剧制作实践",
+    "facts": [],
+    "files": [["播放完整作品", "assets/ai-drama/work-01.mp4"]],
+    "tone": "dark",
+    "cover": "assets/ai-drama/work-01.jpg",
+    "mediaType": "video",
+    "orientation": "portrait",
+    "durationLabel": "1:04"
+  },
+  {
+    "id": "ai-drama-02",
+    "category": "aigc-experience",
+    "title": "AI 漫剧作品 02",
+    "summary": "AI 真人短剧 · 完整成片 · 1:12",
+    "description": "实习期间参与制作的 AI 真人短剧成片。已获公司授权，展示加水印版本，仅作个人作品展示。",
+    "role": "AI 真人短剧制作实践",
+    "facts": [],
+    "files": [["播放完整作品", "assets/ai-drama/work-02.mp4"]],
+    "tone": "dark",
+    "cover": "assets/ai-drama/work-02.jpg",
+    "mediaType": "video",
+    "orientation": "portrait",
+    "durationLabel": "1:12"
+  },
+  {
+    "id": "ai-drama-03",
+    "category": "aigc-experience",
+    "title": "AI 漫剧作品 03",
+    "summary": "AI 真人短剧 · 完整成片 · 2:37",
+    "description": "实习期间参与制作的 AI 真人短剧成片。已获公司授权，展示加水印版本，仅作个人作品展示。",
+    "role": "AI 真人短剧制作实践",
+    "facts": [],
+    "files": [["播放完整作品", "assets/ai-drama/work-03.mp4"]],
+    "tone": "dark",
+    "cover": "assets/ai-drama/work-03.jpg",
+    "mediaType": "video",
+    "orientation": "portrait",
+    "durationLabel": "2:37"
+  },
+  {
+    "id": "ai-drama-04",
+    "category": "aigc-experience",
+    "title": "AI 漫剧作品 04",
+    "summary": "AI 真人短剧 · 完整成片 · 1:02",
+    "description": "实习期间参与制作的 AI 真人短剧成片。已获公司授权，展示加水印版本，仅作个人作品展示。",
+    "role": "AI 真人短剧制作实践",
+    "facts": [],
+    "files": [["播放完整作品", "assets/ai-drama/work-04.mp4"]],
+    "tone": "dark",
+    "cover": "assets/ai-drama/work-04.jpg",
+    "mediaType": "video",
+    "orientation": "portrait",
+    "durationLabel": "1:02"
+  },
+  {
+    "id": "ai-drama-05",
+    "category": "aigc-experience",
+    "title": "AI 漫剧作品 05",
+    "summary": "AI 真人短剧 · 完整成片 · 1:20",
+    "description": "实习期间参与制作的 AI 真人短剧成片。已获公司授权，展示加水印版本，仅作个人作品展示。",
+    "role": "AI 真人短剧制作实践",
+    "facts": [],
+    "files": [["播放完整作品", "assets/ai-drama/work-05.mp4"]],
+    "tone": "dark",
+    "cover": "assets/ai-drama/work-05.jpg",
+    "mediaType": "video",
+    "orientation": "portrait",
+    "durationLabel": "1:20"
   },
   {
     "id": "wechat-recruit",
@@ -417,7 +494,7 @@ const projects = [
     "id": "video-21",
     "category": "video",
     "title": "决胜21点",
-    "summary": "视频作品 · 点击播放",
+    "summary": "视频作品 · 查看作品介绍",
     "description": "视频作品，网页公开版提供封面与文字说明；视频文件可在面试或获得授权后另行提供。",
     "role": "",
     "facts": [],
