@@ -24,10 +24,124 @@ grid.addEventListener('click',event=>{
 document.querySelector('#close-dialog').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
 dialog.addEventListener('close',()=>{content.querySelectorAll('video').forEach(v=>{v.pause();v.removeAttribute('src');v.load();});content.innerHTML='';document.body.style.overflow='';opener?.focus();});
-const printPages=[];
-for(const c of categories){const ps=projects.filter(p=>p.category===c.id);for(let i=0;i<ps.length;i+=2)printPages.push({c,ps:ps.slice(i,i+2),continued:i>0});}
-const total=printPages.length+1;
-const foot=n=>`<div class="print-foot">郭湘妮 · 作品集 / 3381613703@qq.com <span style="float:right">${n} / ${total}</span></div>`;
-const printCard=p=>`<article class="print-project${p.mediaType==='video'?' print-video':''}${p.mediaType==='text'?' print-text-project':''}">${p.mediaType==='text'?'':p.cover?`<img src="${url(p.cover)}" alt="${esc(p.title)}预览">`:`<div class="print-graphic">${esc(p.graphic||p.title)}</div>`}<div><p class="print-category">${esc(p.group||categories.find(c=>c.id===p.category).name)}</p><h3>${esc(p.title)}</h3>${p.role?`<p><b>我的职责：</b>${esc(p.role)}</p>`:''}<p>${esc(p.description)}</p>${p.facts.map(([k,v])=>`<p><b>${esc(k)}：</b>${esc(v)}</p>`).join('')}<p class="print-media-note">${/\.mp4$/i.test((p.files[0]?.[1] || ''))?'视频作品 · 网页版可播放':/\.pdf$/i.test((p.files[0]?.[1] || ''))?'完整 PDF · 网页版可阅读':p.originalUrl?`<a href="${esc(p.originalUrl)}">阅读公众号原文 ↗</a>`:p.mediaType==='text'?esc(p.disclosure||'项目经历 · 仅提供文字介绍'):p.mediaType==='video'?'视频作品 · 公开版仅展示封面与介绍':'本页展示原作局部 · 网页版可查看完整长图'}</p></div></article>`;
-document.querySelector('#print-portfolio').innerHTML=`<section class="print-page"><div class="print-kicker">GUO XIANGNI / PORTFOLIO</div><h1>郭湘妮<br>作品集</h1><p>南京师范大学 · 新闻学（全媒体运营方向）<br>2023.09 — 2027.06 · 本科在读</p><p>项目探索 / AI 实践 / 创作记录</p><div class="print-intro"><h2>${categories.length} 类作品，${projects.length} 件实践</h2>${categories.map(c=>`<p><b>${c.name}</b> / ${projects.filter(p=>p.category===c.id).length} 件<br>${c.note}</p>`).join('')}</div><p>邮箱：3381613703@qq.com<br>电话：15673335126</p><p class="print-media-note">按类型收录项目与作品，完整公开作品可在网页版查看。<br>悦境母语仅提供文字介绍，不包含未公开素材。</p>${foot(1)}</section>`+printPages.map(({c,ps,continued},i)=>`<section class="print-page"><div class="print-kicker">${c.en} / ${c.name}${continued?'（续）':''}</div><h2>${c.name}</h2>${ps.map(printCard).join('')}${foot(i+2)}</section>`).join('');
+const printRoot=document.querySelector('#print-portfolio');
+if(printRoot){
+  const renderCard=p=>{
+    const isVideo=p.mediaType==='video'||p.files.some(([,f])=>/\.mp4$/i.test(f));
+    const isPdf=p.files.some(([,f])=>/\.pdf$/i.test(f));
+    const badgeText=isVideo?'视频作品 · 可在线播放':isPdf?'完整 PDF · 可在线阅读':p.mediaType==='article'?'微信公众号原文':p.mediaType==='text'?'项目策划':'图文作品';
+    let mediaHtml='';
+    if(p.cover){
+      mediaHtml=`<div class="print-card-media ${isVideo?'is-video':''}"><img src="${url(p.cover)}" alt="${esc(p.title)}">${p.durationLabel?`<span class="media-dur">${p.durationLabel}</span>`:''}</div>`;
+    }else if(p.graphic||p.title){
+      mediaHtml=`<div class="print-card-media placeholder ${p.tone||'lilac'}"><span>${esc(p.graphic||p.title)}</span></div>`;
+    }
+    const factsHtml=p.facts&&p.facts.length?`<div class="print-facts">${p.facts.map(([k,v])=>`<div class="print-fact"><b>${esc(k)}：</b><span>${esc(v)}</span></div>`).join('')}</div>`:'';
+    return `<article class="print-card ${!p.cover&&!p.graphic?'text-only':''}">
+      ${mediaHtml}
+      <div class="print-card-body">
+        <div class="print-card-header">
+          ${p.group?`<span class="print-group-tag">${esc(p.group)}</span>`:''}
+          <h4 class="print-card-title">${esc(p.title)}</h4>
+          ${p.role?`<span class="print-role-badge">职责：${esc(p.role)}</span>`:''}
+        </div>
+        ${p.summary?`<p class="print-card-summary">${esc(p.summary)}</p>`:''}
+        ${p.description&&p.description!==p.summary?`<p class="print-card-desc">${esc(p.description)}</p>`:''}
+        ${factsHtml}
+        ${p.disclosure?`<div class="print-card-disclosure">${esc(p.disclosure)}</div>`:''}
+        <div class="print-card-footer">
+          <span class="badge-type">${badgeText}</span>
+          <span class="badge-link">portfolio-na8.pages.dev ↗</span>
+        </div>
+      </div>
+    </article>`;
+  };
+
+  const renderCategory=(c,idx)=>{
+    const ps=projects.filter(p=>p.category===c.id);
+    if(!ps.length)return '';
+    const groups=[...new Set(ps.map(p=>p.group||''))];
+    let cardsHtml='';
+    if(groups.length>1||(groups.length===1&&groups[0])){
+      cardsHtml=groups.map(g=>`
+        <div class="print-subgroup">
+          ${g?`<h4 class="print-subgroup-title">${esc(g)} <span>(${ps.filter(p=>(p.group||'')===g).length} 件)</span></h4>`:''}
+          <div class="print-cards-flow">
+            ${ps.filter(p=>(p.group||'')===g).map(renderCard).join('')}
+          </div>
+        </div>
+      `).join('');
+    }else{
+      cardsHtml=`<div class="print-cards-flow">${ps.map(renderCard).join('')}</div>`;
+    }
+    return `<section class="print-cat-section" data-cat="${c.id}">
+      <div class="print-cat-head">
+        <div class="print-cat-num">${String(idx+1).padStart(2,'0')}</div>
+        <div class="print-cat-titles">
+          <h3 class="print-cat-name">${esc(c.name)}</h3>
+          <span class="print-cat-meta">${esc(c.en)} · ${esc(c.note)}</span>
+        </div>
+        <div class="print-cat-badge">${ps.length} 件实践</div>
+      </div>
+      ${c.intro?`<p class="print-cat-intro">${esc(c.intro)}</p>`:''}
+      ${cardsHtml}
+    </section>`;
+  };
+
+  printRoot.innerHTML=`
+    <div class="print-cover">
+      <div class="print-topbar">
+        <span class="topbar-brand">GUO XIANGNI / PORTFOLIO</span>
+        <span class="topbar-motto">观察 · 表达 · 连接 · 持续探索</span>
+      </div>
+      <div class="print-hero">
+        <h1 class="hero-name">郭湘妮</h1>
+        <p class="hero-tagline">从一个个想法，到一次次实践</p>
+        <p class="hero-edu">
+          <b>南京师范大学</b> · 新闻学（全媒体运营方向） · 2023.09 — 2027.06 · 本科在读
+        </p>
+        <div class="hero-contacts">
+          <span>📧 3381613703@qq.com</span>
+          <span>📱 156-7333-5126</span>
+          <span>🌐 https://portfolio-na8.pages.dev</span>
+        </div>
+      </div>
+      <div class="print-catalog">
+        <div class="catalog-title">实践全景 / PORTFOLIO ARCHIVE (${categories.length} 类作品 · ${projects.length} 件实践)</div>
+        <div class="catalog-grid">
+          ${categories.map((c,i)=>`
+            <div class="catalog-item">
+              <span class="cat-idx">${String(i+1).padStart(2,'0')}</span>
+              <div class="cat-info">
+                <strong>${esc(c.name)}</strong>
+                <small>${esc(c.note)} · ${projects.filter(p=>p.category===c.id).length} 件</small>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="print-highlights">
+        <div class="hl-col">
+          <b>01 观察与策划</b>
+          <p>从具体需求与用户洞察出发，完成产品/IP 宣传规划、选题构思与脚本分镜设计。</p>
+        </div>
+        <div class="hl-col">
+          <b>02 内容采编与视觉表达</b>
+          <p>采写、图文排版、长图设计与视频剪辑，熟练运用 PS、Canva、PR、剪映完成一体化呈现。</p>
+        </div>
+        <div class="hl-col">
+          <b>03 AI 深度应用与落地</b>
+          <p>熟练运用 AI 图像与视频生成模型，搭建自动化提示词工作流并落地为可交互网页产品。</p>
+        </div>
+      </div>
+      <div class="print-cover-foot">
+        <span>* 注：微信/手机直接访问 portfolio-na8.pages.dev 可在线播放视频并体验交互效果。</span>
+        <span>第 1 页</span>
+      </div>
+    </div>
+    <div class="print-body">
+      ${categories.map(renderCategory).join('')}
+    </div>
+  `;
+}
 document.querySelectorAll('.print-button').forEach(b=>b.addEventListener('click',()=>window.print()));
